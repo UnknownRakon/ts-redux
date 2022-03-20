@@ -1,14 +1,21 @@
+import { Container } from "@mui/material";
 import React from "react";
-import TodoList from "./components/TodoList";
-import UserList from "./components/UserList";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navigation from "./components/AppBar";
+import UserPage from "./components/UserPage";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const App = () => {
   return (
-    <div>
-      <UserList />
-      <hr />
-      <TodoList />
-    </div>
+    <BrowserRouter>
+      <CssBaseline />
+      <Navigation />
+      <Container maxWidth="xl" sx={{ paddingTop: 3 }}>
+        <Routes>
+          <Route path={"/"} element={<UserPage />}></Route>
+        </Routes>
+      </Container>
+    </BrowserRouter>
   );
 };
 
