@@ -1,9 +1,14 @@
-import { Box } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import { red } from "@mui/material/colors";
+
 import React, { useEffect } from "react";
+
 import { useAction } from "../hooks/useActions";
 import { useTypeSelector } from "../hooks/usedTypeSelector";
 import { fetchUsers } from "../store/action-creators/user";
+
 import { User } from "../types/user";
+
 import UserListItem from "./UserListItem";
 
 const UserList: React.FC = () => {
@@ -15,10 +20,22 @@ const UserList: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <h1>Идёт загрузка...</h1>;
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <CircularProgress size={100} />
+      </Box>
+    );
   }
   if (error) {
-    return <h1>{error}</h1>;
+    return (
+      <Typography
+        variant="h5"
+        color={red[500]}
+        sx={{ textAlign: "center", marginBottom: 3 }}
+      >
+        {error}
+      </Typography>
+    );
   }
   return (
     <Box

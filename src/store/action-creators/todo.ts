@@ -1,12 +1,12 @@
-import { TodoAction, TodoActionTypes } from './../../types/todo';
+import { Todo, TodoAction, TodoActionTypes } from './../../types/todo';
 import axios from 'axios';
 import { Dispatch } from 'redux';
 
-export const fetchTodos = (page = 1, limit = 10) => {
+export const fetchTodos = (page = 1, limit = 8) => {
     return async (dispatch: Dispatch<TodoAction>) => {
         try {
             dispatch({type: TodoActionTypes.FETCH_TODOS})
-            const response = await axios.get('https://jsonplaceholder.typicode.com/todos', {
+            const response = await axios.get<Todo[]>('https://jsonplaceholder.typicode.com/todos', {
                 params: {_page: page, _limit: limit}
             })
             setTimeout(() => {
@@ -22,5 +22,12 @@ export function setTodoPage(page: number): TodoAction{
     return {
         type: TodoActionTypes.SET_TODO_PAGE,
         payload: page
+    }
+}
+
+export function setItemChecked(itemID: number): TodoAction{   
+    return {
+        type: TodoActionTypes.SET_ITEM_CHECKED,
+        payload: itemID
     }
 }

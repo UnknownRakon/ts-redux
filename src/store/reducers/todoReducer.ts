@@ -6,7 +6,7 @@ const initialState: TodoState = {
     loading: false,
     error: null,
     page: 1,
-    limit: 10
+    limit: 8
 }
 
 export const todoReducer = (state = initialState, action: TodoAction): TodoState => {
@@ -18,7 +18,13 @@ export const todoReducer = (state = initialState, action: TodoAction): TodoState
         case TodoActionTypes.FETCH_TODOS_ERROR:
             return {...state, loading: false, error: action.payload }
         case TodoActionTypes.SET_TODO_PAGE:
-            return {...state, page: action.payload }
+            return {...state, page: state.page + action.payload }
+        case TodoActionTypes.SET_ITEM_CHECKED:
+            
+            const index = state.todos.findIndex(todo => todo.id === action.payload)
+            const newArray = [...state.todos]
+            newArray[index].completed = !newArray[index].completed
+            return {...state, todos: newArray}
 
         default: 
             return state
