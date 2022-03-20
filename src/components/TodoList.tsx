@@ -1,4 +1,12 @@
-import { Box, ButtonGroup, Button } from "@mui/material";
+import {
+  Box,
+  ButtonGroup,
+  Button,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
+import { red } from "@mui/material/colors";
+
 import React, { useEffect } from "react";
 import { useAction } from "../hooks/useActions";
 import { useTypeSelector } from "../hooks/usedTypeSelector";
@@ -16,11 +24,22 @@ const TodoList: React.FC = () => {
   }, [page]);
 
   if (loading) {
-    return <h1>Идёт загрузка...</h1>;
+    return (
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <CircularProgress size={100} />
+      </Box>
+    );
   }
-
   if (error) {
-    return <h1>{error}</h1>;
+    return (
+      <Typography
+        variant="h5"
+        color={red[500]}
+        sx={{ textAlign: "center", marginBottom: 3 }}
+      >
+        {error}
+      </Typography>
+    );
   }
 
   return (
