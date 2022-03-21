@@ -20,12 +20,12 @@ export const todoReducer = (state = initialState, action: TodoAction): TodoState
         case TodoActionTypes.SET_TODO_PAGE:
             return {...state, page: state.page + action.payload }
         case TodoActionTypes.SET_ITEM_CHECKED:
-            
             const index = state.todos.findIndex(todo => todo.id === action.payload)
             const newArray = [...state.todos]
             newArray[index].completed = !newArray[index].completed
             return {...state, todos: newArray}
-
+        case TodoActionTypes.CREATE_TODO:
+            return {...state, todos: [action.payload, ...state.todos]}
         default: 
             return state
     }

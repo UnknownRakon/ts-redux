@@ -25,7 +25,7 @@ const TodoList: React.FC = () => {
 
   if (loading) {
     return (
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box sx={{ display: "flex", justifyContent: "center", paddingTop: 5 }}>
         <CircularProgress size={100} />
       </Box>
     );
@@ -56,10 +56,11 @@ const TodoList: React.FC = () => {
           borderRadius: 1,
         }}
       >
-        {todos.map((todo) => (
+        {todos.map((todo, index) => (
           <TodoListItem
             key={todo.id}
             id={todo.id}
+            index={index}
             title={todo.title}
             completed={todo.completed}
           />

@@ -13,16 +13,22 @@ export interface TodoItemProps {
   id: number;
   title: string;
   completed: boolean;
+  index: number;
 }
 
-const TodoListItem: React.FC<TodoItemProps> = ({ id, title, completed }) => {
+const TodoListItem: React.FC<TodoItemProps> = ({
+  id,
+  title,
+  completed,
+  index,
+}) => {
   const { setItemChecked } = useAction();
   return (
     <Card sx={{ width: 300 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            {id}
+            {index + 1}
           </Avatar>
         }
         title={title}

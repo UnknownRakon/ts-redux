@@ -31,3 +31,10 @@ export function setItemChecked(itemID: number): TodoAction{
         payload: itemID
     }
 }
+
+export function createTodo(todo: Todo): TodoAction{   
+    return {
+        type: TodoActionTypes.CREATE_TODO,
+        payload: todo
+    }
+}

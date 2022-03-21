@@ -1,5 +1,5 @@
 export interface Todo {
-        userId: number,
+        userId?: number,
         id: number,
         title: string,
         completed: boolean  
@@ -18,7 +18,8 @@ export enum TodoActionTypes {
     FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS",
     FETCH_TODOS_ERROR = "FETCH_TODOS_ERROR",
     SET_TODO_PAGE = "SET_TODO_PAGE",
-    SET_ITEM_CHECKED = "SET_ITEM_CHECKED"
+    SET_ITEM_CHECKED = "SET_ITEM_CHECKED",
+    CREATE_TODO = "CREATE_TODO"
 }
 
 interface FetchTodosAction{
@@ -45,8 +46,14 @@ interface SetItemCheckedAction{
     payload: number;
 }
 
+interface CreateTodoAction{
+    type: TodoActionTypes.CREATE_TODO;
+    payload: Todo;
+}
+
 export type TodoAction = FetchTodosAction 
 | FetchTodosSuccessAction 
 | FetchTodosErrorAction 
 | SetTodosPageAction
 | SetItemCheckedAction
+| CreateTodoAction
